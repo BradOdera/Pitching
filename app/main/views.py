@@ -3,6 +3,7 @@ from flask_login import login_required, current_user
 import datetime
 
 from . import main
+from ..models import User,Pitch
 
 # Views
 @main.route('/')
@@ -42,7 +43,7 @@ def new_pitches():
     pitch_form = PitchForm()
     if pitch_form.validate_on_submit():
         # title = request.form['title']
-		Comment = request.form['comment']
+        Comment = request.form['comment']
 
         # updating pitch instance
         new_pitch = Pitch(title = title,content = Comment,user = current_user,likes = 0,dislikes = 0)
@@ -52,4 +53,4 @@ def new_pitches():
         return redirect(url_for('.index'))
 
     title = 'New Pitch'
-    return render_template('new_pitch.html',title = title,pitch_form = pitch_form)
+    return render_template('new_pitches.html',title = title,pitch_form = pitch_form)

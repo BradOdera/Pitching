@@ -4,16 +4,18 @@
 <div class="container">
 	<h1 class="text-center">Pitching app</h1>	
 </div>
-<div class="container">
-	<h2>Add Pitch!!</h2>
-	<p></p>
-	<form action="/action_page.php">
-	  <div class="form-group">
-		<!-- <label for="comment">Pitch:</label> -->
-		<textarea class="form-control" rows="5" id="comment" name="text"></textarea>
-	  </div>
-	  <button type="submit" class="btn btn-primary">Post</button>
-	</form>
-  </div>
+
+  {%for pitch in pitches%}
+    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 review-card">
+        <div class="well well-lg">
+            <h4>{{pitch.title}}</h4>
+            <p>{{pitch.content| truncate(100)}}</p>
+            <p>Written by:  {{pitch.user.username}} <a href="/pitch/{{pitch.id}}" class="btn btn-primary pull-right">Read</a> </p>
+        </div>
+    </div>
+{%endfor%}
+<div class="container" style="padding-bottom: 20px;">
+    <a href="{{url_for('main.new_pitches')}}" class="btn btn-success">Create pitch</a>
+</div>
 
 {% endblock %}
