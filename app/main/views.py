@@ -1,19 +1,23 @@
 from flask import render_template, request, redirect, url_for
+from flask_login import login_required, current_user
+import datetime
+
 from . import main
 
 # Views
 @main.route('/')
 def index():
     title = 'Pitches App'
-    return render_template('index.html', title=title)
-
-
-@main.route('/pitches')
-def promotion_pitches():
-
     pitches = Pitch.get_pitches()
 
-    return render_template("all_pitches.html", pitches=pitches)
+    return render_template('index.html', title=title, pitches=pitches)
+
+
+# @main.route('/pitches')
+# def all_pitches():
+
+
+#     return render_template("all_pitches.html")
 
 
 @main.route('/pitch/<int:id>', methods=['GET', 'POST'])
@@ -34,4 +38,24 @@ def pitch(id):
         db.session.add(pitch)
         db.session.commit()
 
+        return redirect("/pitch/{pitch_id}".format(pitch_id=pitch.id))
     return render_template('pitch.html', pitch=pitch, date=posted_date)
+
+
+@main.route('/pitch/new', methods=['GET', 'POST'])
+@login_required
+def new_pitches():
+    pitch_form = PitchForm()
+    if pitch_form.validate_on_submit():
+        # title = request.form['title']
+		Comment = request.form['comment']
+
+        # updating pitch instance
+        new_pitch = Pitch(title = title,content = Comment,user = current_user,likes = 0,dislikes = 0)
+
+        # save pitch
+        new_pitch.save_pitch()
+        return redirect(url_for('.index'))
+
+    title = 'New Pitch'
+    return render_template('new_pitch.html',title = title,pitch_form = pitch_form)

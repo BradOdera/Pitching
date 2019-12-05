@@ -18,6 +18,9 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String)
     email = db.Column(db.String)
     pass_secure = db.Column(db.String(255))
+    
+    pitch = db.relationship('Pitch', backref='user', lazy="dynamic")
+    
 
     @property
     def password(self):
@@ -38,7 +41,6 @@ class Pitch(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String)
     content = db.Column(db.String(1000))
-    category = db.Column(db.String)
     posted = db.Column(db.DateTime, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
     likes = db.Column(db.Integer)
