@@ -13,12 +13,6 @@ def index():
     return render_template('index.html', title=title, pitches=pitches)
 
 
-# @main.route('/pitches')
-# def all_pitches():
-
-
-#     return render_template("all_pitches.html")
-
 
 @main.route('/pitch/<int:id>', methods=['GET', 'POST'])
 def pitch(id):
