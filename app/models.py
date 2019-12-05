@@ -2,6 +2,8 @@ from . import login_manager
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db
+from datetime import datetime
+
 
 
 @login_manager.user_loader
@@ -49,8 +51,8 @@ class Pitch(db.Model):
         db.session.commit()
 
     @classmethod
-    def get_pitches(cls, category):
-        pitches = Pitch.query.filter_by(category=category).all()
+    def get_pitches(cls):
+        pitches = Pitch.query.all()
 
         return pitches
 
