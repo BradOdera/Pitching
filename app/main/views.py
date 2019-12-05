@@ -1,9 +1,10 @@
 from flask import render_template, request, redirect, url_for
 from flask_login import login_required, current_user
 import datetime
+from .forms import PitchForm
 
 from . import main
-from ..models import User,Pitch
+from ..models import User, Pitch
 
 # Views
 @main.route('/')
@@ -12,7 +13,6 @@ def index():
     pitches = Pitch.get_pitches()
 
     return render_template('index.html', title=title, pitches=pitches)
-
 
 
 @main.route('/pitch/<int:id>', methods=['GET', 'POST'])
@@ -46,11 +46,12 @@ def new_pitches():
         # Comment = request.form['comment']
 
         # updating pitch instance
-        new_pitch = Pitch(title = title,content = Comment,user = current_user,likes = 0,dislikes = 0)
+        new_pitch = Pitch(title=title, content=Comment,
+                          user=current_user, likes=0, dislikes=0)
 
         # save pitch
         new_pitch.save_pitch()
         return redirect(url_for('.index'))
 
     title = 'New Pitch'
-    return render_template('new_pitches.html',title = title,pitch_form = pitch_form)
+    return render_template('new_pitches.html', title=title, pitch_form=pitch_form)
