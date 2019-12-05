@@ -2,20 +2,21 @@
 
 {% block content %}
 <div class="container">
-	<h1 class="text-center">Pitching app</h1>	
+	<h1 class="text-center">Pitching app</h1>
 </div>
 
-  {%for pitch in pitches%}
-    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 review-card">
-        <div class="well well-lg">
-            <h4>{{pitch.title}}</h4>
-            <p>{{pitch.content| truncate(100)}}</p>
-            <p>Written by:  {{pitch.user.username}} <a href="/pitch/{{pitch.id}}" class="btn btn-primary pull-right">Read</a> </p>
-        </div>
-    </div>
+{%for pitch in pitches%}
+<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 review-card">
+	<div class="well well-lg">
+		<h4>Written by: {{pitch.user.username}}</h4>
+		<p>{{pitch.content}}</p>
+		<p><a href="/pitch/{{pitch.id}}" class="btn btn-primary pull-right">Read</a>
+		</p>
+	</div>
+</div>
 {%endfor%}
 <div class="container" style="padding-bottom: 20px;">
-    <a href="{{url_for('main.new_pitches')}}" class="btn btn-success">Create pitch</a>
+	<a href="{{url_for('main.new_pitches')}}" class="btn btn-success">Create pitch</a>
 </div>
 
 {% endblock %}

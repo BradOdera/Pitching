@@ -46,12 +46,11 @@ def new_pitches():
         # Comment = request.form['comment']
 
         # updating pitch instance
-        new_pitch = Pitch(title=title, content=Comment,
-                          user=current_user, likes=0, dislikes=0)
-
-        # save pitch
-        new_pitch.save_pitch()
-        return redirect(url_for('.index'))
+        if pitch_form.validate_on_submit():
+            new_pitch = Pitch(content=pitch_form.description.data, user=current_user, likes=0, dislikes=0)
+            # save pitch
+            new_pitch.save_pitch()
+            return redirect(url_for('main.index'))
 
     title = 'New Pitch'
     return render_template('new_pitches.html', title=title, pitch_form=pitch_form)
