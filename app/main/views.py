@@ -4,5 +4,5 @@ from . import main
 # Views
 @main.route('/')
 def index():
-	title = 'Flask Base'
+	title = 'Pitches App'
 	return render_template('index.html',title = title)
