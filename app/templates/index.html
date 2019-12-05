@@ -6,7 +6,16 @@
 </div>
 
 {%for pitch in pitches%}
-<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 review-card">
+<style>
+	#wow {
+		padding: 5%;
+	}
+
+	#me{
+		margin-left: 5%;
+	}
+</style>
+<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 review-card" id="wow">
 	<div class="well well-lg">
 		<h4>Written by: {{pitch.user.username}}</h4>
 		<p>{{pitch.content}}</p>
@@ -16,7 +25,7 @@
 </div>
 {%endfor%}
 <div class="container" style="padding-bottom: 20px;">
-	<a href="{{url_for('main.new_pitches')}}" class="btn btn-success">Create pitch</a>
+	<a href="{{url_for('main.new_pitches')}}" class="btn btn-success" id="me">Create pitch</a>
 </div>
 
 {% endblock %}
