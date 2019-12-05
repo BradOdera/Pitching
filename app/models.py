@@ -1,7 +1,7 @@
 from . import login_manager
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
-
+from . import db
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -16,7 +16,7 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String)
     pass_secure = db.Column(db.String(255))
 
- @property
+    @property
     def password(self):
         raise AttributeError('You cannot read the password attribute')
 
