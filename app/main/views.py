@@ -43,7 +43,7 @@ def new_pitches():
     pitch_form = PitchForm()
     if pitch_form.validate_on_submit():
         # title = request.form['title']
-        Comment = request.form['comment']
+        # Comment = request.form['comment']
 
         # updating pitch instance
         new_pitch = Pitch(title = title,content = Comment,user = current_user,likes = 0,dislikes = 0)

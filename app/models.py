@@ -46,8 +46,6 @@ class Pitch(db.Model):
     likes = db.Column(db.Integer)
     dislikes = db.Column(db.Integer)
 
-    comments = db.relationship('Comment', backref='pitch', lazy="dynamic")
-
     def save_pitch(self):
         db.session.add(self)
         db.session.commit()
